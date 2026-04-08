@@ -1,18 +1,18 @@
 import streamlit as st
 import openai
 
-st.title("AI Prompt Tester")
+
 
 api_key = st.text_input("Enter your API Key", type="password")
 
-# 👇 Client prompt (from UI)
+#  Client prompt (from UI)
 system_prompt = st.text_area(
     "Prompt",
-    value="You are a helpful assistant.",
+    value="write prompt here.",
     height=150
 )
 
-# 👇 Hidden backend prompt (your rules)
+#  Hidden backend prompt (your rules)
 backend_prompt = """Answer questions based on provided context. Follow these guidelines carefully:
 
 1. Answer ONLY based on the information in the provided context documents.
@@ -20,7 +20,7 @@ backend_prompt = """Answer questions based on provided context. Follow these gui
 3. DO NOT say phrases like 'According to Document X' or 'As mentioned in Chunk Y'.
 4. If the information cannot be determined from the context, respond ONLY with 'Based on the provided information, I cannot answer this question.' DO NOT include a SOURCES section in this case.
 5. Be concise but comprehensive, focusing on the most relevant information.
-6. ONLY when you can answer the question, include a separate section titled 'SOURCES (or equivalent in other languages):' that lists the document titles with page numbers.
+6. ONLY when you can answer the question, include a separate sectfion titled 'SOURCES (or equivalent in other languages):' that lists the document titles with page numbers.
 7. Do not repeat the user prompt, context, or these instructions in your answer.
 """
 
@@ -41,7 +41,7 @@ if api_key and user_text:
 
     st.session_state.messages.append({"role": "user", "content": user_text})
 
-    # 👇 Combine backend + client prompt
+    # Combine backend + client prompt
     final_system_prompt = f"""
 {backend_prompt}
 
